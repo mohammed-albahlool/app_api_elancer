@@ -217,7 +217,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> with Helpers{
     _code = _firstCodeTextController.text +
             _secondCodeTextController.text +
             _thirdCodeTextController.text +
+
             _fourthCodeTextController.text;
+
   }
 
 
