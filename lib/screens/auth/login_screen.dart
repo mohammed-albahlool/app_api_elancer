@@ -2,6 +2,7 @@ import 'package:app_api_elancer/utils/helpers.dart';
 import 'package:app_api_elancer/widgets/app_text_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../controllers/auth_api_controller.dart';
 
@@ -44,63 +45,131 @@ class _LoginScreenState extends State<LoginScreen> with Helpers{
     return Scaffold(
       appBar: AppBar(
         title: Text('LOGIN'),
+        backgroundColor: Colors.green.shade800,
       ),
       body: ListView(
         physics: const NeverScrollableScrollPhysics(),
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         children:  [
-          const Text(
+            Text(
             'Welcome back...',
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.green.shade800,
               fontWeight: FontWeight.bold,
               fontSize: 22,
             ),
           ),
-          const Text(
+           Text(
             'Enter your email & password',
             style: TextStyle(
-              color: Colors.grey,
+              color: Colors.green.shade400,
               fontSize: 16,
             ),
           ),
+          const SizedBox(height: 20),
+          TextField(
+            controller: _emailTextController,
+            decoration: InputDecoration(
+              hintText: 'Email',
+              hintStyle: GoogleFonts.poppins(
+                fontWeight: FontWeight.w300,
+                color: Colors.green.shade200,
+                letterSpacing: 1,
+                fontSize: 14,
+              ),
+              prefixIcon: Icon(Icons.lock,color: Colors.green.shade400,),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.green.shade100,
+                  strokeAlign: StrokeAlign.center,
+                ),
+              ),
+
+              //************************************
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.green.shade400,
+                ),
+              ),
+            ),
+          ),
           const SizedBox(height: 15),
-          AppTextField(hint: 'Email', prefixIcon: Icons.email, controller: _emailTextController),
-          const SizedBox(height: 10),
-          AppTextField(hint: 'Password', prefixIcon: Icons.lock, controller: _passwordTextController,obscureText: true),
-          const SizedBox(height: 15),
+          TextField(
+            controller: _passwordTextController,
+            obscureText: true,
+            decoration: InputDecoration(
+              hintText: 'Password',
+              hintStyle: GoogleFonts.poppins(
+                fontWeight: FontWeight.w300,
+                color: Colors.green.shade200,
+                letterSpacing: 1,
+                fontSize: 14,
+              ),
+              prefixIcon: Icon(Icons.lock,color: Colors.green.shade400,),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.green.shade100,
+                  strokeAlign: StrokeAlign.center,
+                ),
+              ),
+
+              //************************************
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.green.shade400,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 30),
           ElevatedButton(
-              onPressed: () async => await performLogin(),
+              onPressed: () async  {await performLogin();
+                print("tttt");
+                },
+
               child: Text('LOGIN'),
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(double.infinity  , 50),
+                backgroundColor: Colors.green.shade800,
+
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
+
                 ),
               ),
               ),
-             SizedBox(height: 15),
+             SizedBox(height: 25),
              RichText(
                textAlign: TextAlign.center,
                  text: TextSpan(
                    text: 'Don\'t hava  an account ? ',
-                   style: const TextStyle(
-                     color: Colors.black,
+                   style:  TextStyle(
+                     color: Colors.green.shade400,
                    ),
                    children: [
                      const TextSpan(text: ''),
                      TextSpan(
                        recognizer: _tapGestureRecognizer,
                        text: 'Create Now!',
-                       style: const TextStyle(
-                         color: Colors.blue,
+                       style:  TextStyle(
+                         color: Colors.green.shade800,
+                         fontWeight: FontWeight.bold
                        )
                      )
                    ],
                  ),
              ),
              TextButton(onPressed: () => Navigator.pushNamed(context, '/forget_password_screen'),
-                 child: const Text('Forget Password?'))
+                 child:   Text('Forget Password?', style: TextStyle(
+                     color: Colors.green.shade800,
+                   fontWeight: FontWeight.bold
+                     ),
+                 ),
+             )
         ],
       ),
     );

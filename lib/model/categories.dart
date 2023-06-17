@@ -3,8 +3,8 @@ class Category {
  late String title;
  late String description;
  late String image;
- late String visible;
- late String productsCount;
+ late int visible;
+ late int productsCount;
 
 
 

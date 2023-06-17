@@ -14,6 +14,7 @@ class CodeTextField extends StatelessWidget {
   final void Function(String value) onChanged;
   final FocusNode focusNode;
 
+
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -23,14 +24,14 @@ class CodeTextField extends StatelessWidget {
       keyboardType: TextInputType.number,
       textAlign: TextAlign.center,
       onChanged: onChanged,
-      style: const TextStyle(
-          color: Colors.black,
+      style:  TextStyle(
+          color: Colors.green.shade800,
           fontWeight: FontWeight.bold
       ),
       decoration: InputDecoration(
         counterText: '',
-        enabledBorder: border(),
-        focusedBorder: border(borderColor: Colors.blue),
+        enabledBorder: border(borderColor: Colors.green.shade200),
+        focusedBorder: border(borderColor: Colors.green.shade400),
       ),
     );
   }

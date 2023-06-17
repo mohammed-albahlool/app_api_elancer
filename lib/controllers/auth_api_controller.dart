@@ -80,4 +80,41 @@ class AuthApiController with Helpers{
     return false;
   }
 
+
+  Future<bool> resetPassword(
+      BuildContext context , {
+        required String email ,
+        required String code ,
+        required String password}) async {
+
+    var url = Uri.parse(ApiSettings.resetPassword);
+    var response = await http.post(
+        url,
+        body: {
+          'email': email,
+          'code': code,
+          'password': password,
+          'confirmation': password,
+        },
+        headers: {HttpHeaders.acceptHeader: 'application/json'}
+    );
+
+    if(response.statusCode == 200){
+      showSnackBar(context: context, message: jsonDecode(response.body)['message'],);
+      return true;
+    }else if(response.statusCode == 400){
+      showSnackBar(context: context, message: jsonDecode(response.body)['message'],
+      error: true,
+      );
+    }else if(response.statusCode == 500){
+      showSnackBar(context: context, message: 'Something went wrong, try again',
+      error: true,
+      );
+    }
+
+    return false;
+  }
+
+
+
 }

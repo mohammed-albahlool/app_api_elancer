@@ -31,8 +31,8 @@ class _LaunchScreenState extends State<LaunchScreen> {
             begin: AlignmentDirectional.topStart,
             end: AlignmentDirectional.bottomEnd,
             colors: [
-              Colors.blue.shade800,
-              Colors.orange.shade600,
+              Colors.green.shade800,
+              Colors.green.shade100,
             ],
           ),
         ),

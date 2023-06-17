@@ -8,7 +8,6 @@ class Student {
  late  String token;
  late  String refreshToken;
  late  bool isActive;
-
  late String password;
 
   Student();

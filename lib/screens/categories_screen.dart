@@ -26,6 +26,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Categories'),
+        backgroundColor: Colors.green.shade800,
 
         actions: [
           IconButton(
@@ -52,6 +53,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             ),
               itemBuilder: (context, index) {
                 return Card(
+                  color: Colors.green.shade200,
                   elevation: 4,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),

@@ -6,13 +6,13 @@ class User {
  late String mobile;
  late String bio;
  late String jobTitle;
- late String latitude;
- late String longitude;
+ late double latitude;
+ late double longitude;
  late String country;
  late String image;
- late String active;
+ late int active;
  late String emailVerifiedAt;
- late String imagesCount;
+ late int imagesCount;
 
 
 

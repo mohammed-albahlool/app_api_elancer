@@ -1,7 +1,9 @@
+import 'package:app_api_elancer/controllers/auth_api_controller.dart';
 import 'package:app_api_elancer/utils/helpers.dart';
 import 'package:app_api_elancer/widgets/app_text_field.dart';
 import 'package:app_api_elancer/widgets/code_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({Key? key , required this.email}) : super(key: key);
@@ -71,23 +73,25 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> with Helpers{
     return Scaffold(
       appBar: AppBar(
         title: Text('RESET PASSWORD'),
+        backgroundColor: Colors.green.shade800,
+
       ),
       body: ListView(
         physics: const NeverScrollableScrollPhysics(),
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         children:  [
-          const Text(
+           Text(
             'Enter new password...',
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.green.shade800,
               fontWeight: FontWeight.bold,
               fontSize: 22,
             ),
           ),
-          const Text(
+           Text(
             'Enter new password and received code',
             style: TextStyle(
-              color: Colors.grey,
+              color: Colors.green.shade400,
               fontSize: 16,
             ),
           ),
@@ -98,9 +102,11 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> with Helpers{
                 child: CodeTextField(
                   textEditingController: _firstCodeTextController,
                   focusNode: _firstFocusNode,
+
                    onChanged: (value) {
                     if(value.isNotEmpty) {
                       _secondFocusNode.requestFocus();
+
                     }
                 },),
               ),
@@ -114,6 +120,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> with Helpers{
                       ? _thirdFocusNode.requestFocus()
                       : _firstFocusNode.requestFocus();
                     },
+
+
                   ),
               ),
               const SizedBox(width: 10),
@@ -125,7 +133,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> with Helpers{
                     value.isNotEmpty
                         ? _fourthFocusNode.requestFocus()
                         : _secondFocusNode.requestFocus();
-                  },),
+                  },
+
+                ),
               ),
               const SizedBox(width: 10),
               Expanded(
@@ -140,26 +150,73 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> with Helpers{
               ),
             ],
           ),
-          const SizedBox(height: 10),
-          AppTextField(
-              hint: 'Password',
-              prefixIcon: Icons.lock,
-              controller: _newPasswordTextController,
-              obscureText: true,
-          ),
-          const SizedBox(height: 10),
-          AppTextField(
-            hint: 'Password Confirmation',
-            prefixIcon: Icons.lock,
-            controller: _newPasswordConfirmationTextController,
+          const SizedBox(height: 20),
+          TextField(
+            controller: _newPasswordTextController,
             obscureText: true,
+            decoration: InputDecoration(
+              hintText: 'Password',
+              hintStyle: GoogleFonts.poppins(
+                fontWeight: FontWeight.w300,
+                color: Colors.green.shade200,
+                letterSpacing: 1,
+                fontSize: 14,
+              ),
+              prefixIcon: Icon(Icons.lock,color: Colors.green.shade400,),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.green.shade100,
+                  strokeAlign: StrokeAlign.center,
+                ),
+              ),
+
+              //************************************
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.green.shade400,
+                ),
+              ),
+            ),
           ),
           const SizedBox(height: 15),
+          TextField(
+            controller: _newPasswordConfirmationTextController,
+            obscureText: true,
+            decoration: InputDecoration(
+              hintText: 'Password',
+              hintStyle: GoogleFonts.poppins(
+                fontWeight: FontWeight.w300,
+                color: Colors.green.shade200,
+                letterSpacing: 1,
+                fontSize: 14,
+              ),
+              prefixIcon: Icon(Icons.lock,color: Colors.green.shade400,),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.green.shade100,
+                  strokeAlign: StrokeAlign.center,
+                ),
+              ),
+
+              //************************************
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.green.shade400,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
           ElevatedButton(
-              onPressed: () async => await performForgetPassword(),
-              child: Text('SENT'),
+              onPressed: () async => await performResetPassword(),
+              child: Text('RESET'),
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity  , 50),
+                minimumSize: const Size(double.infinity  , 50),
+                backgroundColor: Colors.green.shade800,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -172,13 +229,16 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> with Helpers{
     );
   }
 
-  Future<void> performForgetPassword() async {
+  Future<void> performResetPassword() async {
     if(checkData()){
-      // await forgetPassword();
+       await resetPassword();
     }
   }
 
   bool checkData() {
+    if(checkCode() && checkPassword()){
+      return true;
+    }
     return false;
   }
 
@@ -192,6 +252,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> with Helpers{
           message: 'Password confirmation error!',
           error:  true
       );
+      return false;
     }
     showSnackBar(
         context: context,
@@ -223,23 +284,18 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> with Helpers{
 
 
 
+  Future<void> resetPassword() async  {
+    bool status = await AuthApiController().resetPassword(
+        context,
+        email: widget.email, code: _code!, password: _newPasswordTextController.text);
+    if(status) Navigator.pop(context);
 
-
-  //   showSnackBar(context: context, message: 'Enter required data !', error: true);
-  //   return false;
-  // }
-  // Future<void> forgetPassword() async  {
-  //   bool status = await AuthApiController().forgetPassword(
-  //       context,
-  //       email: _emailTextController.text);
-  //   //if(status) Navigator.pushReplacementNamed(context, '/categories_screen');
-  //
-  //   }
-  // }
+    }
+  }
 
 
 
-}
+
 
 
 

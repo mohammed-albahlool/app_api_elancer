@@ -3,6 +3,7 @@ import 'package:app_api_elancer/model/student.dart';
 import 'package:app_api_elancer/utils/helpers.dart';
 import 'package:app_api_elancer/widgets/app_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -40,38 +41,124 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers{
     return Scaffold(
       appBar: AppBar(
         title: Text('Register'),
+        backgroundColor: Colors.green.shade800,
       ),
       body: ListView(
         physics: const NeverScrollableScrollPhysics(),
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         children:  [
-          const Text(
+           Text(
             'Create new account ...',
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.green.shade800,
               fontWeight: FontWeight.bold,
               fontSize: 22,
             ),
           ),
-          const Text(
+           Text(
             'Enter details blow',
             style: TextStyle(
-              color: Colors.grey,
+              color: Colors.green.shade400,
               fontSize: 16,
             ),
           ),
+          const SizedBox(height: 20),
+          TextField(
+            controller: _fullNameTextController,
+            decoration: InputDecoration(
+              hintText: 'FullName',
+              hintStyle: GoogleFonts.poppins(
+                fontWeight: FontWeight.w300,
+                color: Colors.green.shade200,
+                letterSpacing: 1,
+                fontSize: 14,
+              ),
+              prefixIcon: Icon(Icons.person,color: Colors.green.shade400,),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.green.shade100,
+                  strokeAlign: StrokeAlign.center,
+                ),
+              ),
+
+              //************************************
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.green.shade400,
+                ),
+              ),
+            ),
+          ),
           const SizedBox(height: 15),
-          AppTextField(hint: 'Full Name', prefixIcon: Icons.person, controller: _fullNameTextController),
-          const SizedBox(height: 10),
-          AppTextField(hint: 'Email', prefixIcon: Icons.email, controller: _emailTextController),
-          const SizedBox(height: 10),
-          AppTextField(hint: 'Password', prefixIcon: Icons.lock, controller: _passwordTextController,obscureText: true),
-          const SizedBox(height: 10),
+          TextField(
+            controller: _emailTextController,
+            decoration: InputDecoration(
+              hintText: 'Email',
+              hintStyle: GoogleFonts.poppins(
+                fontWeight: FontWeight.w300,
+                color: Colors.green.shade200,
+                letterSpacing: 1,
+                fontSize: 14,
+              ),
+              prefixIcon: Icon(Icons.email,color: Colors.green.shade400,),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.green.shade100,
+                  strokeAlign: StrokeAlign.center,
+                ),
+              ),
+
+              //************************************
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.green.shade400,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 15),
+          TextField(
+            controller: _passwordTextController,
+            obscureText: true,
+            decoration: InputDecoration(
+              hintText: 'Password',
+              hintStyle: GoogleFonts.poppins(
+                fontWeight: FontWeight.w300,
+                color: Colors.green.shade200,
+                letterSpacing: 1,
+                fontSize: 14,
+              ),
+              prefixIcon: Icon(Icons.lock,color: Colors.green.shade400,),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.green.shade100,
+                  strokeAlign: StrokeAlign.center,
+                ),
+              ),
+
+              //************************************
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.green.shade400,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 15),
           Row(
             children: [
               Expanded(
                 child: RadioListTile<String>(
-                  title: const Text('Male'),
+                  selectedTileColor: Colors.green,
+                  title:  Text('Male',style: TextStyle(
+                      color: Colors.green.shade800,
+                      fontWeight: FontWeight.bold),),
                   contentPadding: EdgeInsets.zero,
                   value: 'M',
                   groupValue: _gender,
@@ -82,12 +169,16 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers{
                       });
                     }
                   },
+                  activeColor: Colors.green,
                 ),
               ),
 
               Expanded(
                 child: RadioListTile<String>(
-                  title: const Text('Female'),
+                  title:  Text('Female',style: TextStyle(
+                    color: Colors.green.shade800,
+                    fontWeight: FontWeight.bold,
+                  ),),
                   contentPadding: EdgeInsets.zero,
                   value: 'F',
                   groupValue: _gender,
@@ -98,6 +189,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers{
                       });
                     }
                   },
+                  activeColor: Colors.green,
                 ),
               ),
 
@@ -110,6 +202,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers{
               onPressed: () async => await performRegister(),
               child: Text('REGISTER'),
               style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green.shade800,
                 minimumSize: Size(double.infinity  , 50),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
